@@ -10,8 +10,9 @@
   <title>Frontend Mentor | Crowdfunding product page</title>
 </head>
 <body>
-  <header>
-    <svg></svg>
+  <header id="header-main">
+    <img id="logo" src="./images/logo.svg" alt="Logo" />
+    <img id="menu-icon" src="./images/icon-hamburger.svg" alt="Menu" />
     <nav>
       <a href="">About</a>
       <a href="">Discover</a>
@@ -19,77 +20,76 @@
     </nav>
   </header>
 
-  <div><img /></div>
+  <div id="hero-image"></div>
 
-  <div>
-    <svg></svg>
-    <header>
+  <section id="intro">
+    <header id="header-product">
       <h1>Mastercraft Bamboo Monitor Riser</h1>
       A beautiful & handcrafted monitor stand to reduce neck and eye strain.
     </header>
     
-    <div>
+    <div id="options">
       <button>Back this project</button>
-      <button>
-        <svg></svg>
-        <div>Bookmark</div>
+      <button class="collapsable">
+        <svg id="bookmark" width="56" height="56" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle fill="#2F2F2F" cx="28" cy="28" r="28"/><path fill="#B1B1B1" d="M23 19v18l5-5.058L33 37V19z"/></g></svg>
+        <div class="collapse">Bookmark</div>
       </button>
     </div>
-  </div>
+  </section>
 
-  <div>
-    <div>
-      <div><span>$89,914</span>of $100,000 backed</div>
+  <section id="statistics">
+    <ul class="responsive">
+      <li><strong>$89,914</strong>of $100,000 backed</li>
       <hr>
-      <div><span>5,007</span>total backers</div>
+      <li><strong>5,007</strong>total backers</li>
       <hr>
-      <div><span>56</span>days left</div>
-    </div>
-    <div>
-      <div></div>
-    </div>
-  </div>
+      <li><strong>56</strong>days left</li>
+    </ul>
+    <div id="goal-progress"></div>
+  </section>
 
-  <div>
+  <section id="rewards">
     <section>
-    <header>About this project</header>
+      <header>About this project</header>
       <p>The Mastercraft Bamboo Monitor Riser is a sturdy and stylish platform that elevates your screen 
       to a more comfortable viewing height. Placing your monitor at eye level has the potential to improve 
       your posture and make you more comfortable while at work, helping you stay focused on the task at hand.</p>
       <p>Featuring artisan craftsmanship, the simplicity of design creates extra desk space below your computer 
       to allow notepads, pens, and USB sticks to be stored under the stand.</p>
     </section>
-    <div>
-      <header>
-        <h1>Bamboo Stand</h1>
-        <h2>Pledge $25 or more</h2>
-      </header>
-      You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and 
-      you’ll be added to a special Backer member list.
-      <span>101</span> left
-      <button>Select Reward</button>
+    <div id="reward-list">
+      <div>
+        <header>
+          <h1>Bamboo Stand</h1>
+          <h2>Pledge $25 or more</h2>
+        </header>
+        You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and 
+        you’ll be added to a special Backer member list.
+        <strong>101</strong> left
+        <button>Select Reward</button>
+      </div>
+      <div>
+        <header>
+          <h1>Black Edition Stand</h1>
+          <h2>Pledge $75 or more</h2>
+        </header>
+        You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer 
+        member list. Shipping is included.
+        <strong>64</strong> left
+        <button>Select Reward</button>
+      </div>
+      <div class="out-of-stock">
+        <header>
+          <h1>Mahogany Special Edition</h1>
+          <h2>Pledge $200 or more</h2>
+        </header>
+        You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added 
+        to our Backer member list. Shipping is included.
+        <strong>0</strong> left
+        <button>Out of Stock</button>
+      </div>
     </div>
-    <div>
-      <header>
-        <h1>Black Edition Stand</h1>
-        <h2>Pledge $75 or more</h2>
-      </header>
-      You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer 
-      member list. Shipping is included.
-      <span>64</span> left
-      <button>Select Reward</button>
-    </div>
-    <div>
-      <header>
-        <h1>Mahogany Special Edition</h1>
-        <h2>Pledge $200 or more</h2>
-      </header>
-      You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added 
-      to our Backer member list. Shipping is included.
-      <span>0</span> left
-      <button>Out of Stock</button>
-    </div>
-  </div>
+  </section>
   <!-- Selection modal start -->
   <div class="modal">
     Back this project
@@ -145,5 +145,16 @@
     Got it!
   </div>
   <!-- Success modal end -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hero = document.getElementById('hero-image');
+      if (window.innerWidth <= 375) {
+        hero.style.backgroundImage = 'url(./images/image-hero-mobile.jpg)';
+      } else {
+        hero.style.backgroundImage = 'url(./images/image-hero-desktop.jpg)';
+      }
+    });
+  </script>
 </body>
 </html>
