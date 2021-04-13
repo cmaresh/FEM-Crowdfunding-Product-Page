@@ -46,7 +46,37 @@ table {
   border-spacing: 0; }
 
 .modal {
-  display: none; }
+  box-sizing: border-box;
+  display: none;
+  justify-content: center;
+  align-items: start;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  padding: 2rem;
+  padding-top: 12rem;
+  background-color: rgba(0, 0, 0, 0.3); }
+  .modal .modal-blur {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0; }
+  .modal .modal-content {
+    position: relative;
+    padding: 2.4rem;
+    padding-top: 3.5rem;
+    padding-bottom: 3rem;
+    border-radius: 4px;
+    background-color: white; }
+    .modal .modal-content .close-modal {
+      position: absolute;
+      cursor: pointer;
+      right: 10px;
+      top: 30px;
+      padding: 10px; }
 
 :root {
   font-family: 'Commissioner', sans-serif;
@@ -56,6 +86,7 @@ table {
   --black: hsl(0, 0%, 0%);
   --dark-gray: hsl(0, 0%, 48%);
   --gray: #F2F2F2;
+  --standard-border: 1px solid #DBDBDB;
   --res-width: 400px; }
 
 h1 {
@@ -145,20 +176,6 @@ section {
     section {
       padding: 4.5rem; } }
 
-.responsive {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center; }
-  .responsive.mobile-flex-start {
-    align-items: flex-start; }
-    @media (min-width: 400px) {
-      .responsive.mobile-flex-start {
-        align-items: center; } }
-  @media (min-width: 400px) {
-    .responsive {
-      flex-direction: row; } }
-
 body {
   position: relative;
   display: flex;
@@ -237,25 +254,33 @@ body {
       display: flex;
       justify-content: space-between;
       padding-top: 2.5rem; }
-  body #statistics ul li {
-    text-align: center; }
-    body #statistics ul li strong {
-      display: block; }
-    body #statistics ul li small {
-      font-size: 1.4rem; }
+  body #statistics ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; }
     @media (min-width: 400px) {
-      body #statistics ul li {
-        text-align: left;
-        width: 33%; } }
-  body #statistics ul hr {
-    width: 7.5rem;
-    margin-top: 25px;
-    border: 1px solid var(--dark-gray); }
-    @media (min-width: 400px) {
-      body #statistics ul hr {
-        width: 0;
-        height: 6rem;
-        margin: 0 5rem 0 0; } }
+      body #statistics ul {
+        flex-direction: row; } }
+    body #statistics ul li {
+      text-align: center; }
+      body #statistics ul li strong {
+        display: block; }
+      body #statistics ul li small {
+        font-size: 1.4rem; }
+      @media (min-width: 400px) {
+        body #statistics ul li {
+          text-align: left;
+          width: 33%; } }
+    body #statistics ul hr {
+      width: 7.5rem;
+      margin-top: 25px;
+      border: 1px solid var(--dark-gray); }
+      @media (min-width: 400px) {
+        body #statistics ul hr {
+          width: 0;
+          height: 6rem;
+          margin: 0 5rem 0 0; } }
   body #statistics #goal-progress {
     margin-top: 30px;
     height: 12px;
@@ -272,26 +297,77 @@ body {
     padding-top: 4rem; }
     body #rewards p {
       margin-top: 2.5rem; }
-    body #rewards #reward-list {
-      margin-top: 4rem; }
-      body #rewards #reward-list section {
-        padding: 2rem; }
-        @media (min-width: 400px) {
-          body #rewards #reward-list section {
-            padding: 3.5rem; } }
-      body #rewards #reward-list .remaining-rewards {
+    body #rewards #reward-list li {
+      border-radius: 4px;
+      margin-top: 2rem;
+      border: var(--standard-border);
+      padding: 2rem; }
+      body #rewards #reward-list li:first-child {
+        margin-top: 4rem; }
+      body #rewards #reward-list li header {
         display: flex;
-        align-items: center; }
-        body #rewards #reward-list .remaining-rewards strong {
-          display: inline-block;
-          padding-right: 1rem; }
-      body #rewards #reward-list footer {
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        align-items: flex-start; }
+        @media (min-width: 400px) {
+          body #rewards #reward-list li header {
+            flex-direction: row; } }
+        @media (min-width: 400px) {
+          body #rewards #reward-list li header {
+            align-items: center; } }
+      body #rewards #reward-list li footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        align-items: flex-start;
         margin-top: 3rem; }
-        body #rewards #reward-list footer button {
+        @media (min-width: 400px) {
+          body #rewards #reward-list li footer {
+            flex-direction: row; } }
+        @media (min-width: 400px) {
+          body #rewards #reward-list li footer {
+            align-items: center; } }
+        body #rewards #reward-list li footer button {
           margin-top: 2.5rem; }
           @media (min-width: 400px) {
-            body #rewards #reward-list footer button {
+            body #rewards #reward-list li footer button {
               margin-top: 0; } }
-      body #rewards #reward-list .unavailable {
-        opacity: 0.5;
-        pointer-events: none; }
+      @media (min-width: 400px) {
+        body #rewards #reward-list li {
+          padding: 3.5rem; } }
+    body #rewards #reward-list .remaining-rewards {
+      display: flex;
+      align-items: center; }
+      body #rewards #reward-list .remaining-rewards strong {
+        display: inline-block;
+        padding-right: 1rem; }
+    body #rewards #reward-list .unavailable {
+      opacity: 0.5;
+      pointer-events: none; }
+  body #back-project .modal-content > h2 {
+    margin-bottom: 3rem; }
+  body #back-project .modal-content #pledge-list li {
+    border: var(--standard-border);
+    border-radius: 4px;
+    padding: 3rem 2rem;
+    margin-top: 3rem; }
+    body #back-project .modal-content #pledge-list li h3 {
+      display: flex;
+      margin-bottom: 4rem;
+      align-items: center; }
+      body #back-project .modal-content #pledge-list li h3 .reward-select {
+        border-radius: 12px;
+        border: 1px solid #DBDBDB;
+        width: 24px;
+        height: 24px;
+        margin-right: 15px; }
+    body #back-project .modal-content #pledge-list li .remaining-rewards {
+      align-items: center; }
+      body #back-project .modal-content #pledge-list li .remaining-rewards strong {
+        display: inline-block;
+        margin-right: 3px;
+        font-size: 1.4rem; }
+    body #back-project .modal-content #pledge-list li .enter-pledge {
+      display: none; }

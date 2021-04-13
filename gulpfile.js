@@ -3,7 +3,7 @@ const gulp_sass = require('gulp-sass');
 const browser_sync = require('browser-sync').create();
 
 function sass() {
-  return gulp.src('./*.scss')
+  return gulp.src('./scss/*.scss')
     .pipe(gulp_sass())
     .pipe(gulp.dest('.'))
     .pipe(browser_sync.stream());
@@ -18,7 +18,7 @@ function sync() {
 }
 
 function watch() {
-  gulp.watch('./*.scss', { ignoreInitial: false }, sass);
+  gulp.watch('./scss/*.scss', { ignoreInitial: false }, sass);
 }
 
 exports.default = gulp.parallel(sync, watch);
