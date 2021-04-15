@@ -122,12 +122,12 @@
 
       <ul id="pledge-list">
         <li>
-          <h3><div class="reward-select" id="pledge-opt-1"></div>Pledge with no reward</h3>
+          <h3><div class="reward-select"></div>Pledge with no reward</h3>
           Choose to support us without a reward if you simply believe in our project. As a backer, 
           you will be signed up to receive product updates via email.
         </li>
         <li>
-          <h3><div class="reward-select" id="pledge-opt-2"></div>Bamboo Stand</h3>
+          <h3><div class="reward-select"></div>Bamboo Stand</h3>
           <h4>Pledge $25 or more</h4>
           You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and
           you’ll be added to a special Backer member list.
@@ -136,14 +136,16 @@
           </div>
           <!-- Selected pledge start -->
           <div class="enter-pledge">
-            Enter your pledge
-            <input type="number"></input>
-            <button>Continue</button>
+            <h5>Enter your pledge</h5>
+            <div>
+              <input type="text"></input>
+              <button>Continue</button>
+            </div>
           </div>
           <!-- Selected pledge end -->
         </li>
         <li>
-          <h3><div class="reward-select" id="pledge-opt-3"></div>Black Edition Stand</h3>
+          <h3><div class="reward-select"></div>Black Edition Stand</h3>
           <h4>Pledge $75 or more</h4>
           You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer
           member list. Shipping is included.
@@ -152,14 +154,16 @@
           </div>
           <!-- Selected pledge start -->
           <div class="enter-pledge">
-            Enter your pledge
-            <input type="number"></input>
-            <button>Continue</button>
+            <h5>Enter your pledge</h5>
+            <div>
+              <input type="text"></input>
+              <button>Continue</button>
+            </div>
           </div>
           <!-- Selected pledge end -->
         </li>
         <li>
-          <h3><div class="reward-select" id="pledge-opt-4"></div>Mahogany Special Edition</h3>
+          <h3><div class="reward-select"></div>Mahogany Special Edition</h3>
           <h4>Pledge $200 or more</h4>
           You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added
           to our Backer member list. Shipping is included.
@@ -168,9 +172,11 @@
           </div>
           <!-- Selected pledge  start -->
           <div class="enter-pledge">
-            Enter your pledge
-            <input type="number"></input>
-            <button>Continue</button>
+            <h5>Enter your pledge</h5>
+            <div>
+              <input type="text"></input>
+              <button>Continue</button>
+            </div>
           </div>
           <!-- Selected pledge end -->
         </li>
@@ -214,6 +220,12 @@
       document.querySelectorAll('.modal-blur, .close-modal').forEach(modal => {
         modal.addEventListener('click', e => closeModals() );
       });
+
+      document.querySelectorAll('.reward-select').forEach(rs => {
+        rs.addEventListener('click', e => {
+          e.target.parentNode.parentNode.classList.toggle('active');
+        })
+      })
     });
   </script>
 </body>

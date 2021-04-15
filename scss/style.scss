@@ -460,9 +460,10 @@ body {
             #pledge-list {
                 
                 li {
+                    box-sizing: border-box;
                     border: var(--standard-border);
                     border-radius: 4px;
-                    padding: 3rem 2rem;
+                    padding: 3.1rem 2.1rem;
                     margin-top: 3rem;    
     
                     h3 {
@@ -490,7 +491,47 @@ body {
 
                     .enter-pledge {
                         display: none;
+                        flex-direction: column;
+                        align-items: center;
 
+                        div {
+                            display: flex;
+                            width: 100%;
+                            justify-content: space-between;
+
+                            input {
+                                position: relative;
+                                width: 60px;
+                                border-radius: 30px;
+                                border: 1px solid var(--dark-gray);
+                                padding-left: 4rem;
+
+                                &:focus {
+                                    outline: none;
+                                }
+
+                                &:before {
+                                    content: '$';
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                }
+                            }
+
+                            button {
+                                width: 115px;
+                                padding: 0 2.6rem;
+                            }
+                        }
+                    }
+
+                    &.active {
+                        padding: 3rem 2rem;
+                        border: 2px solid var(--primary);
+
+                        .enter-pledge {
+                            display: flex;
+                        }
                     }
                 }
             }

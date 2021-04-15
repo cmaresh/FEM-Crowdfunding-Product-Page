@@ -349,9 +349,10 @@ body {
   body #back-project .modal-content > h2 {
     margin-bottom: 3rem; }
   body #back-project .modal-content #pledge-list li {
+    box-sizing: border-box;
     border: var(--standard-border);
     border-radius: 4px;
-    padding: 3rem 2rem;
+    padding: 3.1rem 2.1rem;
     margin-top: 3rem; }
     body #back-project .modal-content #pledge-list li h3 {
       display: flex;
@@ -370,4 +371,31 @@ body {
         margin-right: 3px;
         font-size: 1.4rem; }
     body #back-project .modal-content #pledge-list li .enter-pledge {
-      display: none; }
+      display: none;
+      flex-direction: column;
+      align-items: center; }
+      body #back-project .modal-content #pledge-list li .enter-pledge div {
+        display: flex;
+        width: 100%;
+        justify-content: space-between; }
+        body #back-project .modal-content #pledge-list li .enter-pledge div input {
+          position: relative;
+          width: 60px;
+          border-radius: 30px;
+          border: 1px solid var(--dark-gray);
+          padding-left: 4rem; }
+          body #back-project .modal-content #pledge-list li .enter-pledge div input:focus {
+            outline: none; }
+          body #back-project .modal-content #pledge-list li .enter-pledge div input:before {
+            content: '$';
+            position: absolute;
+            top: 0;
+            left: 0; }
+        body #back-project .modal-content #pledge-list li .enter-pledge div button {
+          width: 115px;
+          padding: 0 2.6rem; }
+    body #back-project .modal-content #pledge-list li.active {
+      padding: 3rem 2rem;
+      border: 2px solid var(--primary); }
+      body #back-project .modal-content #pledge-list li.active .enter-pledge {
+        display: flex; }
