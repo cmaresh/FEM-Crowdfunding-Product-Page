@@ -453,68 +453,148 @@ body {
 
     #back-project {
         .modal-content {
+            position: sticky;
+            top: 3rem;
+            height: calc(100vh - 18rem);
+
+            @media(min-width: $res-width) {
+                padding: 5rem;
+            }
+
             > h2 {
                 margin-bottom: 3rem;
             }
     
             #pledge-list {
+                overflow-y: scroll;
+                height: 90%;
                 
+                -ms-overflow-style: none;  /* IE and Edge */
+                scrollbar-width: none;  /* Firefox */
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
                 li {
                     box-sizing: border-box;
                     border: var(--standard-border);
                     border-radius: 4px;
-                    padding: 3.1rem 2.1rem;
-                    margin-top: 3rem;    
+                    margin-top: 3rem;   
+                    max-width: 73rem; 
     
-                    h3 {
+                    .top {
+                        padding: 3.1rem 2.1rem;
                         display: flex;
-                        margin-bottom: 4rem;
-                        align-items: center;
+                        flex-direction: column;
 
-                        .reward-select {
-                            border-radius: 12px;
-                            border: 1px solid #DBDBDB;
-                            width: 24px;
-                            height: 24px;
-                            margin-right: 15px;
+                        h3 {
+                            display: flex;
+                            margin-bottom: 4rem;
+                            align-items: center;
+                            cursor: pointer;
+    
+                            .reward-select {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-radius: 12px;
+                                border: 1px solid #DBDBDB;
+                                width: 24px;
+                                height: 24px;
+                                margin-right: 15px;
+                            }
+
+                            &:hover {
+                                color: var(--primary);
+
+                                .reward-select {
+                                    border: 1px solid var(--primary);
+                                }
+                            }
+                        }
+    
+                        .remaining-rewards {
+                            align-items: center;
+                            strong {
+                                display: inline-block;
+                                margin-right: 3px;
+                                font-size: 1.4rem;
+                            }
+                        }
+
+                        @media(min-width: $res-width) {
+                            flex-direction: row;
+                            flex-wrap: wrap;
+                            padding: 2.1rem 2.1rem;
+
+                            h3 {
+                                margin-bottom: 2rem;
+                            }
+
+                            h4 {
+                                flex: 1;
+                                padding-left: 1.5rem;
+                                padding-top: 0.2rem;
+                            }
+
+                            span {
+                                order: 4;
+                                display: block;
+                                margin-left: 4.1rem
+                            };
+
+                            .remaining-rewards {
+                                margin-top: 2px;
+                                strong {
+                                    line-height: 100%;
+                                }
+                            } 
                         }
                     }
 
-                    .remaining-rewards {
-                        align-items: center;
-                        strong {
-                            display: inline-block;
-                            margin-right: 3px;
-                            font-size: 1.4rem;
-                        }
-                    }
-
-                    .enter-pledge {
+                    .bottom {
                         display: none;
                         flex-direction: column;
                         align-items: center;
+                        padding: 3.1rem 2.1rem;
+                        border-top: 2px solid #ECECEC;
 
-                        div {
+                        > div {
                             display: flex;
                             width: 100%;
                             justify-content: space-between;
+                            margin-top: 2rem;
 
-                            input {
+                            .pledge-amount {
                                 position: relative;
                                 width: 60px;
+                                height: 56px;
                                 border-radius: 30px;
                                 border: 1px solid var(--dark-gray);
                                 padding-left: 4rem;
-
-                                &:focus {
-                                    outline: none;
-                                }
-
+                                display: flex;
+                                align-items: center;
+                                
                                 &:before {
                                     content: '$';
                                     position: absolute;
-                                    top: 0;
-                                    left: 0;
+                                    transform: translateY(-50%);
+                                    top: 50%;
+                                    left: 28px;
+                                    font-size: 1.6rem;
+                                    font-weight: bold;
+                                }
+
+                                input {
+                                    border: none;
+                                    width: 5rem;
+                                    border-radius: 3rem;
+                                    font: inherit;
+                                    &:focus {
+                                        outline: none;
+                                    }
+
                                 }
                             }
 
@@ -523,15 +603,57 @@ body {
                                 padding: 0 2.6rem;
                             }
                         }
+
+                        @media(min-width: $res-width) {
+                            flex-direction: row;
+                            padding: 2.1rem 2.1rem;
+
+                            h5 {
+                                width: 100%;
+                            }
+
+                            > div {
+                                justify-content: flex-end;
+                                margin-top: 0;
+                                
+                                button {
+                                    margin-left: 1.5rem;
+                                }
+                            }
+                        }
                     }
 
                     &.active {
-                        padding: 3rem 2rem;
                         border: 2px solid var(--primary);
 
-                        .enter-pledge {
+                        .top, .bottom {
+                            padding: 3rem 2rem;
+
+                            @media(min-width: $res-width) {
+                                padding: 2rem 2rem;
+                            }
+                        }
+                        .bottom {
                             display: flex;
                         }
+
+                        h3 {
+                            .reward-select {
+                                &::after {
+                                    content: '';
+                                    display: block;
+                                    width: 14px;
+                                    height: 14px;
+                                    border-radius: 100%;
+                                    background-color: var(--primary);
+                                }
+                            }
+                        }
+                    }
+
+                    &.disabled {
+                        pointer-events: none;
+                        opacity: 0.5;
                     }
                 }
             }

@@ -346,56 +346,142 @@ body {
     body #rewards #reward-list .unavailable {
       opacity: 0.5;
       pointer-events: none; }
-  body #back-project .modal-content > h2 {
-    margin-bottom: 3rem; }
-  body #back-project .modal-content #pledge-list li {
-    box-sizing: border-box;
-    border: var(--standard-border);
-    border-radius: 4px;
-    padding: 3.1rem 2.1rem;
-    margin-top: 3rem; }
-    body #back-project .modal-content #pledge-list li h3 {
-      display: flex;
-      margin-bottom: 4rem;
-      align-items: center; }
-      body #back-project .modal-content #pledge-list li h3 .reward-select {
-        border-radius: 12px;
-        border: 1px solid #DBDBDB;
-        width: 24px;
-        height: 24px;
-        margin-right: 15px; }
-    body #back-project .modal-content #pledge-list li .remaining-rewards {
-      align-items: center; }
-      body #back-project .modal-content #pledge-list li .remaining-rewards strong {
-        display: inline-block;
-        margin-right: 3px;
-        font-size: 1.4rem; }
-    body #back-project .modal-content #pledge-list li .enter-pledge {
-      display: none;
-      flex-direction: column;
-      align-items: center; }
-      body #back-project .modal-content #pledge-list li .enter-pledge div {
-        display: flex;
-        width: 100%;
-        justify-content: space-between; }
-        body #back-project .modal-content #pledge-list li .enter-pledge div input {
-          position: relative;
-          width: 60px;
-          border-radius: 30px;
-          border: 1px solid var(--dark-gray);
-          padding-left: 4rem; }
-          body #back-project .modal-content #pledge-list li .enter-pledge div input:focus {
-            outline: none; }
-          body #back-project .modal-content #pledge-list li .enter-pledge div input:before {
-            content: '$';
-            position: absolute;
-            top: 0;
-            left: 0; }
-        body #back-project .modal-content #pledge-list li .enter-pledge div button {
-          width: 115px;
-          padding: 0 2.6rem; }
-    body #back-project .modal-content #pledge-list li.active {
-      padding: 3rem 2rem;
-      border: 2px solid var(--primary); }
-      body #back-project .modal-content #pledge-list li.active .enter-pledge {
-        display: flex; }
+  body #back-project .modal-content {
+    position: sticky;
+    top: 3rem;
+    height: calc(100vh - 18rem); }
+    @media (min-width: 400px) {
+      body #back-project .modal-content {
+        padding: 5rem; } }
+    body #back-project .modal-content > h2 {
+      margin-bottom: 3rem; }
+    body #back-project .modal-content #pledge-list {
+      overflow-y: scroll;
+      height: 90%;
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */ }
+      body #back-project .modal-content #pledge-list::-webkit-scrollbar {
+        display: none; }
+      body #back-project .modal-content #pledge-list li {
+        box-sizing: border-box;
+        border: var(--standard-border);
+        border-radius: 4px;
+        margin-top: 3rem;
+        max-width: 73rem; }
+        body #back-project .modal-content #pledge-list li .top {
+          padding: 3.1rem 2.1rem;
+          display: flex;
+          flex-direction: column; }
+          body #back-project .modal-content #pledge-list li .top h3 {
+            display: flex;
+            margin-bottom: 4rem;
+            align-items: center;
+            cursor: pointer; }
+            body #back-project .modal-content #pledge-list li .top h3 .reward-select {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: 12px;
+              border: 1px solid #DBDBDB;
+              width: 24px;
+              height: 24px;
+              margin-right: 15px; }
+            body #back-project .modal-content #pledge-list li .top h3:hover {
+              color: var(--primary); }
+              body #back-project .modal-content #pledge-list li .top h3:hover .reward-select {
+                border: 1px solid var(--primary); }
+          body #back-project .modal-content #pledge-list li .top .remaining-rewards {
+            align-items: center; }
+            body #back-project .modal-content #pledge-list li .top .remaining-rewards strong {
+              display: inline-block;
+              margin-right: 3px;
+              font-size: 1.4rem; }
+          @media (min-width: 400px) {
+            body #back-project .modal-content #pledge-list li .top {
+              flex-direction: row;
+              flex-wrap: wrap;
+              padding: 2.1rem 2.1rem; }
+              body #back-project .modal-content #pledge-list li .top h3 {
+                margin-bottom: 2rem; }
+              body #back-project .modal-content #pledge-list li .top h4 {
+                flex: 1;
+                padding-left: 1.5rem;
+                padding-top: 0.2rem; }
+              body #back-project .modal-content #pledge-list li .top span {
+                order: 4;
+                display: block;
+                margin-left: 4.1rem; }
+              body #back-project .modal-content #pledge-list li .top .remaining-rewards {
+                margin-top: 2px; }
+                body #back-project .modal-content #pledge-list li .top .remaining-rewards strong {
+                  line-height: 100%; } }
+        body #back-project .modal-content #pledge-list li .bottom {
+          display: none;
+          flex-direction: column;
+          align-items: center;
+          padding: 3.1rem 2.1rem;
+          border-top: 2px solid #ECECEC; }
+          body #back-project .modal-content #pledge-list li .bottom > div {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            margin-top: 2rem; }
+            body #back-project .modal-content #pledge-list li .bottom > div .pledge-amount {
+              position: relative;
+              width: 60px;
+              height: 56px;
+              border-radius: 30px;
+              border: 1px solid var(--dark-gray);
+              padding-left: 4rem;
+              display: flex;
+              align-items: center; }
+              body #back-project .modal-content #pledge-list li .bottom > div .pledge-amount:before {
+                content: '$';
+                position: absolute;
+                transform: translateY(-50%);
+                top: 50%;
+                left: 28px;
+                font-size: 1.6rem;
+                font-weight: bold; }
+              body #back-project .modal-content #pledge-list li .bottom > div .pledge-amount input {
+                border: none;
+                width: 5rem;
+                border-radius: 3rem;
+                font: inherit; }
+                body #back-project .modal-content #pledge-list li .bottom > div .pledge-amount input:focus {
+                  outline: none; }
+            body #back-project .modal-content #pledge-list li .bottom > div button {
+              width: 115px;
+              padding: 0 2.6rem; }
+          @media (min-width: 400px) {
+            body #back-project .modal-content #pledge-list li .bottom {
+              flex-direction: row;
+              padding: 2.1rem 2.1rem; }
+              body #back-project .modal-content #pledge-list li .bottom h5 {
+                width: 100%; }
+              body #back-project .modal-content #pledge-list li .bottom > div {
+                justify-content: flex-end;
+                margin-top: 0; }
+                body #back-project .modal-content #pledge-list li .bottom > div button {
+                  margin-left: 1.5rem; } }
+        body #back-project .modal-content #pledge-list li.active {
+          border: 2px solid var(--primary); }
+          body #back-project .modal-content #pledge-list li.active .top, body #back-project .modal-content #pledge-list li.active .bottom {
+            padding: 3rem 2rem; }
+            @media (min-width: 400px) {
+              body #back-project .modal-content #pledge-list li.active .top, body #back-project .modal-content #pledge-list li.active .bottom {
+                padding: 2rem 2rem; } }
+          body #back-project .modal-content #pledge-list li.active .bottom {
+            display: flex; }
+          body #back-project .modal-content #pledge-list li.active h3 .reward-select::after {
+            content: '';
+            display: block;
+            width: 14px;
+            height: 14px;
+            border-radius: 100%;
+            background-color: var(--primary); }
+        body #back-project .modal-content #pledge-list li.disabled {
+          pointer-events: none;
+          opacity: 0.5; }
