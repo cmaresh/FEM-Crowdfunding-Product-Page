@@ -53,12 +53,12 @@ table {
     box-sizing: border-box;
     display: none;
     justify-content: center;
-    align-items: start;
-    position: absolute;
+    align-items: flex-end;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
     padding: 2rem;
     padding-top: 12rem;
     background-color: rgba(#000, 0.3);
@@ -72,6 +72,8 @@ table {
     }
 
     .modal-content {
+        display: flex;
+        flex-direction: column;
         position: relative;
         padding: 2.4rem;
         padding-top: 3.5rem;
@@ -118,6 +120,7 @@ table {
     --gray: #F2F2F2;
     --standard-border: 1px solid #DBDBDB;
     --res-width: 400px;
+    --completion-width: 50%;
 }
 
 h1 {
@@ -182,11 +185,16 @@ button {
         background-color: var(--secondary);
     }
 
-    &.bookmark {
+    &:focus {
+        outline: none;
+    }
+
+    &#bookmark {
         border: none;
         background-color: transparent;
         justify-content: space-between;
         padding: 0;
+        color: var(--dark-gray);
         background-color: var(--gray);
         &.active {
             svg {
@@ -386,7 +394,7 @@ body {
                 content: "";
                 display: block;
                 height: 100%;
-                width: 50%;
+                width: var(--completion-width);
                 border-radius: 6px;
                 background-color: var(--primary);
             }
@@ -454,8 +462,9 @@ body {
     #back-project {
         .modal-content {
             position: sticky;
-            top: 3rem;
-            height: calc(100vh - 18rem);
+            top: 4vh;
+            max-height: 100%;
+            overflow: hidden;
 
             @media(min-width: $res-width) {
                 padding: 5rem;
