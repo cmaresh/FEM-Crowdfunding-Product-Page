@@ -29,7 +29,7 @@
     </header>
     
     <div id="options">
-      <button>Back this project</button>
+      <button id="back-project-button">Back this project</button>
       <button id="bookmark" class="collapsable active">
         <svg width="56" height="56" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle fill="#2F2F2F" cx="28" cy="28" r="28"/><path fill="#B1B1B1" d="M23 19v18l5-5.058L33 37V19z"/></g></svg>
         <div class="collapse">Bookmark</div>
@@ -76,7 +76,7 @@
         you’ll be added to a special Backer member list.</p>
         <footer>
           <div class="remaining-rewards">
-            <strong data-bind="itemsRemaining" data-reward="0"></strong> left
+            <strong data-bind="itemsRemaining"></strong> left
           </div>
           <button data-reward="0">Select Reward</button>
         </footer>
@@ -90,7 +90,7 @@
         member list. Shipping is included.</p>
         <footer>
           <div class="remaining-rewards">
-            <strong data-bind="itemsRemaining" data-reward="1"></strong> left
+            <strong data-bind="itemsRemaining"></strong> left
           </div>
           <button data-reward="1">Select Reward</button>
         </footer>
@@ -104,7 +104,7 @@
         to our Backer member list. Shipping is included.</p>
         <footer>
           <div class="remaining-rewards">
-            <strong data-bind="itemsRemaining" data-reward="2"></strong> left
+            <strong data-bind="itemsRemaining"></strong> left
           </div>
           <button class="disabled">Out of Stock</button>
         </footer>
@@ -135,7 +135,7 @@
             <span>You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and
               you’ll be added to a special Backer member list.</span>
             <div class="remaining-rewards">
-              <strong data-bind="itemsRemaining" data-reward="0">101</strong> left
+              <strong data-bind="itemsRemaining"></strong> left
             </div>
           </div>
           <!-- Selected pledge start -->
@@ -157,7 +157,7 @@
             <span>You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer
               member list. Shipping is included.</span>
             <div class="remaining-rewards">
-              <strong data-bind="itemsRemaining" data-reward="1"></strong> left
+              <strong data-bind="itemsRemaining"></strong> left
             </div>
           </div>
           <!-- Selected pledge start -->
@@ -179,7 +179,7 @@
             <span>You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added
               to our Backer member list. Shipping is included.</span>
             <div class="remaining-rewards">
-              <strong data-bind="itemsRemaining" data-reward="2"></strong> left
+              <strong data-bind="itemsRemaining"></strong> left
             </div>
           </div>
           <!-- Selected pledge  start -->
@@ -210,6 +210,7 @@
   <script>
     const db = {
       fundsRaised: 89914,
+      fundsGoal: 100000,
       totalBackers: 5007,
       daysLeft: 56,
       itemsRemaining: [
@@ -218,6 +219,13 @@
         0
       ]
     }
+
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0,
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
       const hero = document.getElementById('hero-image');
       const pledgeItems = document.querySelectorAll('#pledge-list li');
@@ -233,12 +241,16 @@
       itemsRemainingElems = [];
       for (let i = 0; i < 3; i++) {
         itemsRemainingElems.push(
-          document.querySelectorAll('[data-bind="itemsRemaining"][data-reward="' + i + '"]')
+          document.querySelectorAll('li[data-reward="' + i + '"] [data-bind="itemsRemaining"]')
         )
       }
+      console.log(itemsRemainingElems);
 
       function updateView() {
-        fundsRaisedElems.forEach(e => e.textContent = db.fundsRaised);
+        fundsRaisedElems.forEach(e => e.textContent = formatter.format(db.fundsRaised));
+
+        document.documentElement.style.setProperty("--completion-width", (db.fundsRaised / db.fundsGoal) * 100 + "%")
+
         totalBackersElems.forEach(e => e.textContent = db.totalBackers);
         daysLeftElems.forEach(e => e.textContent = db.daysLeft);
         for (let i = 0; i < 3; i++) {
@@ -247,17 +259,25 @@
           })
         }
       }
-
       updateView();
+
       const bookmarkElem = document.getElementById('bookmark');
       bookmarkElem.addEventListener('click', e => {
         bookmarkElem.classList.toggle('active');
       });
 
+      function selectReward(curr) {
+        pledgeItems.forEach(e => e.classList.remove('active'));
+        while (curr.nodeName != "LI" && curr.parentNode) curr = curr.parentNode;
+        curr.classList.toggle('active');
+      }
+
       document.querySelectorAll('#reward-list li footer button').forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+          const reward = e.target.dataset.reward;
           const modal = document.getElementById('back-project');
           modal.style.display = 'flex';
+          selectReward(document.querySelector('#back-project li[data-reward="' + reward + '"]'));
         });
       });
 
@@ -275,11 +295,13 @@
 
       document.querySelectorAll('.top h3').forEach(rs => {
         rs.addEventListener('click', e => {
-          pledgeItems.forEach(e => e.classList.remove('active'));
-          let curr = e.target;
-          while (curr.nodeName != "LI" && curr.parentNode) curr = curr.parentNode;
-          curr.classList.toggle('active');
+          selectReward(e.target);
         })
+      });
+
+      document.getElementById('back-project-button').addEventListener('click', e => {
+        const modal = document.getElementById('back-project');
+        modal.style.display = 'flex';
       })
     });
   </script>
