@@ -49,14 +49,13 @@ table {
   box-sizing: border-box;
   display: none;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   padding: 2rem;
-  padding-top: 12rem;
   background-color: rgba(0, 0, 0, 0.3); }
   .modal .modal-blur {
     position: absolute;
@@ -355,7 +354,7 @@ body {
   body #back-project .modal-content {
     position: sticky;
     top: 4vh;
-    max-height: 100%;
+    max-height: calc(100% - 100px);
     overflow: hidden; }
     @media (min-width: 400px) {
       body #back-project .modal-content {
@@ -462,6 +461,9 @@ body {
             body #back-project .modal-content #pledge-list li .bottom > div button {
               width: 115px;
               padding: 0 2.6rem; }
+            @media (max-width: 350px) {
+              body #back-project .modal-content #pledge-list li .bottom > div {
+                justify-content: center; } }
           @media (min-width: 400px) {
             body #back-project .modal-content #pledge-list li .bottom {
               flex-direction: row;
@@ -492,3 +494,24 @@ body {
         body #back-project .modal-content #pledge-list li.disabled {
           pointer-events: none;
           opacity: 0.5; }
+  body #thanks-modal .modal-content {
+    box-sizing: border-box;
+    max-width: 540px;
+    align-items: center;
+    padding-left: 5rem;
+    padding-right: 5rem; }
+    body #thanks-modal .modal-content img {
+      width: 90px; }
+    body #thanks-modal .modal-content h2 {
+      margin-top: 45px;
+      font-size: 2.4rem;
+      text-align: center; }
+    body #thanks-modal .modal-content p {
+      text-align: center;
+      margin-top: 25px; }
+    body #thanks-modal .modal-content button {
+      margin-top: 30px; }
+    @media (max-width: 400px) {
+      body #thanks-modal .modal-content {
+        padding-left: 2rem;
+        padding-right: 2rem; } }

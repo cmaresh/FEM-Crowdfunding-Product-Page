@@ -127,6 +127,15 @@
             <span>Choose to support us without a reward if you simply believe in our project. As a backer, 
               you will be signed up to receive product updates via email.</span>
           </div>
+          <div class="bottom">
+            <h5>Enter your pledge</h5>
+            <div>
+              <div class="pledge-amount">
+                <input class="pledge-input" type="text"></input>
+              </div>
+              <button class="continue">Continue</button>
+            </div>
+          </div>
         </li>
         <li data-reward="0">
           <div class="top">
@@ -145,7 +154,7 @@
               <div class="pledge-amount">
                 <input class="pledge-input" data-reward="0" type="text"></input>
               </div>
-              <button>Continue</button>
+              <button class="continue">Continue</button>
             </div>
           </div>
           <!-- Selected pledge end -->
@@ -167,7 +176,7 @@
               <div class="pledge-amount">
                 <input class="pledge-input" data-reward="1" type="text"></input>
               </div>
-              <button>Continue</button>
+              <button class="continue">Continue</button>
             </div>
           </div>
           <!-- Selected pledge end -->
@@ -189,7 +198,7 @@
               <div class="pledge-amount">
                 <input class="pledge-input" data-reward="2" type="text"></input>
               </div>
-              <button>Continue</button>
+              <button class="continue">Continue</button>
             </div>
           </div>
           <!-- Selected pledge end -->
@@ -199,11 +208,15 @@
   </div>
   <!-- Selection modal end -->
   <!-- Success modal start -->
-  <div class="modal">
-    Thanks for your support!
-    Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get
-    an email once our campaign is completed.
-    Got it!
+  <div class="modal" id="thanks-modal">
+    <div class="modal-blur"></div>
+    <div class="modal-content">
+      <img src="./images/icon-check.svg" alt="check"> 
+      <h2>Thanks for your support!</h2>
+      <p>Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get
+      an email once our campaign is completed.</p>
+      <button id="got-it">Got it!</button>
+    </div>
   </div>
   <!-- Success modal end -->
 
@@ -244,7 +257,6 @@
           document.querySelectorAll('li[data-reward="' + i + '"] [data-bind="itemsRemaining"]')
         )
       }
-      console.log(itemsRemainingElems);
 
       function updateView() {
         fundsRaisedElems.forEach(e => e.textContent = formatter.format(db.fundsRaised));
@@ -253,7 +265,7 @@
 
         totalBackersElems.forEach(e => e.textContent = db.totalBackers);
         daysLeftElems.forEach(e => e.textContent = db.daysLeft);
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < itemsRemainingElems.length; i++) {
           itemsRemainingElems[i].forEach(e => {
             e.textContent = db.itemsRemaining[i];
           })
@@ -286,10 +298,11 @@
       function closeModals() {
         allModals.forEach(modal => {
           modal.style.display = 'none';
+          modal.querySelectorAll('input').forEach(e => e.value = '');
         });
       }
 
-      document.querySelectorAll('.modal-blur, .close-modal').forEach(modal => {
+      document.querySelectorAll('.modal-blur, .close-modal, #got-it').forEach(modal => {
         modal.addEventListener('click', e => closeModals() );
       });
 
@@ -302,6 +315,22 @@
       document.getElementById('back-project-button').addEventListener('click', e => {
         const modal = document.getElementById('back-project');
         modal.style.display = 'flex';
+      });
+
+      document.querySelectorAll('button.continue')
+      .forEach(e => {
+        e.addEventListener('click', e => {
+          let curr = e.target;
+          while (curr.nodeName != "LI" && curr.parentNode) curr = curr.parentNode;
+          const reward = curr.dataset.reward;
+          const donation = curr.querySelector('input').value;
+          if (reward) db.itemsRemaining[reward]--;
+          if (donation) db.fundsRaised += parseInt(donation);
+          db.totalBackers++;
+          updateView();
+          closeModals();
+          document.getElementById('thanks-modal').style.display = 'flex';
+        })
       })
     });
   </script>

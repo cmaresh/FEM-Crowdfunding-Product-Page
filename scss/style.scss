@@ -53,14 +53,14 @@ table {
     box-sizing: border-box;
     display: none;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     padding: 2rem;
-    padding-top: 12rem;
+    //padding-top: 12rem;
     background-color: rgba(#000, 0.3);
 
     .modal-blur {
@@ -463,7 +463,7 @@ body {
         .modal-content {
             position: sticky;
             top: 4vh;
-            max-height: 100%;
+            max-height: calc(100% - 100px);
             overflow: hidden;
 
             @media(min-width: $res-width) {
@@ -611,6 +611,10 @@ body {
                                 width: 115px;
                                 padding: 0 2.6rem;
                             }
+
+                            @media(max-width: 350px) {
+                                justify-content: center;
+                            }
                         }
 
                         @media(min-width: $res-width) {
@@ -665,6 +669,40 @@ body {
                         opacity: 0.5;
                     }
                 }
+            }
+        }
+    }
+
+    #thanks-modal {
+        .modal-content {
+            box-sizing: border-box;
+            max-width: 540px;
+            align-items: center;
+            padding-left: 5rem;
+            padding-right: 5rem;
+
+            img {
+                width: 90px;
+            }
+
+            h2 {
+                margin-top: 45px;
+                font-size: 2.4rem;
+                text-align: center;  
+            }
+            
+            p {
+                text-align: center;
+                margin-top: 25px;
+            }
+
+            button {
+                margin-top: 30px;
+            }
+
+            @media(max-width: $res-width) {
+                padding-left: 2rem;
+                padding-right: 2rem;
             }
         }
     }
