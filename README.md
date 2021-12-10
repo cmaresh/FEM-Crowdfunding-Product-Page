@@ -1,3 +1,5 @@
+This page is viewable on Github Pages at this link: https://cmaresh.github.io/FEM-Crowdfunding-Product-Page/
+
 # Frontend Mentor - Crowdfunding product page
 
 ![Design preview for the Crowdfunding product page coding challenge](./design/desktop-preview.jpg)
